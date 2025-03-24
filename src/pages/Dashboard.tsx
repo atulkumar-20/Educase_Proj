@@ -5,7 +5,6 @@ const Dashboard = () => {
   const location = useLocation()
   const userData = location.state?.userData
   const [showProfile, setShowProfile] = useState(false)
-  const [profileImage, setProfileImage] = useState<string>('/default-avatar.png') // Set default image
 
   if (!userData) {
     return <Navigate to="/welcome" replace />
@@ -14,11 +13,8 @@ const Dashboard = () => {
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (file) {
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        setProfileImage(reader.result as string)
-      }
-      reader.readAsDataURL(file)
+      // Handle file upload if needed in the future
+      console.log('File selected:', file)
     }
   }
 
@@ -69,7 +65,6 @@ const Dashboard = () => {
                         alt="Profile" 
                         className="w-full h-full object-cover"
                         onError={(e) => {
-                          // Fallback if image fails to load
                           const target = e.target as HTMLImageElement;
                           target.src = '/default-avatar.png';
                         }}
